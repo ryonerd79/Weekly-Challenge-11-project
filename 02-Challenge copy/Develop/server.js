@@ -23,6 +23,9 @@ app.get('*', (req, res) =>
 
 )
 
+app.post('/api/notes', (req, res) => {
+  
+});
 
 
 app.listen(PORT, () =>
