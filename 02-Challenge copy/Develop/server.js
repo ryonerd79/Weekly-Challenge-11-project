@@ -4,10 +4,19 @@ const fs = require('fs')
 
 const path = require('path');
 
+const uuid = require('./helpers/uuid');
+
 const app = express();
 
 const PORT = 3001;
 
+let savedNotes =  JSON.parse(fs.readFileSync("./db/db.json", "utf8"));
+
+let newNote = req.body;
+
+savedNotes.push(newNote);
+
+app.use(express.json());
 app.use(express.static('public'));
 
 app.get('/notes', (req, res) =>
@@ -23,9 +32,11 @@ app.get('*', (req, res) =>
 
 )
 
-app.post('/api/notes', (req, res) => {
-  
-});
+app.post('/api/notes', (req, res) =>
+ res.readFile('./db/db.json', 'utf-8',  ))
+ fs.writeFileSync("./db/db.json", JSON.stringify(savedNotes));
+ console.log("A new note has been saved: ", newNote);
+ res.json(savedNotes);
 
 
 app.listen(PORT, () =>
