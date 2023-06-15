@@ -38,6 +38,11 @@ app.post('/api/notes', (req, res) =>
  console.log("A new note has been saved: ", newNote);
  res.json(savedNotes);
 
+ app.post('/api/notes', (req, res) => {
+  req.body 
+  res.json(req.body);
+ })
+
 
 app.listen(PORT, () =>
     console.log(`work notes`)
