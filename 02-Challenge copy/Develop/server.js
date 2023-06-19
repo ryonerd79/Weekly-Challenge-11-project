@@ -29,8 +29,10 @@ app.get('*', (req, res) =>
 app.post('/api/notes', (req, res) => {
   let savedNotes = JSON.parse(fs.readFileSync("./db/db.json", "utf8"));
   let newNote = req.body;
-  let newId = 'Id'
+  newNote.id = Math.floor(Math.random() * 10000000000) + 1;
+  
   savedNotes.push(newNote);
+ 
 
  fs.writeFileSync("./db/db.json", JSON.stringify(savedNotes));
  console.log("A new note has been saved: ", newNote);
